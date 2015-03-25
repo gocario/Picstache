@@ -8,9 +8,9 @@ import model.GreyImage;
  */
 public class NLFilterMeans extends Filter implements IComputeWindow
 {
-	private int windowSize;
-	private int patchSize;
-	private float h;
+	protected int windowSize;
+	protected int patchSize;
+	protected float h;
 
 	/**
 	 *
@@ -28,7 +28,7 @@ public class NLFilterMeans extends Filter implements IComputeWindow
 		this.h = h;
 	}
 
-	private int computeSimilarity(int x1, int y1, int x2, int y2)
+	protected int computeSimilarity(int x1, int y1, int x2, int y2)
 	{
 		int value = 0;
 
@@ -48,7 +48,7 @@ public class NLFilterMeans extends Filter implements IComputeWindow
 		return value;
 	}
 
-	private double computeWeight(int x1, int y1, int x2, int y2)
+	protected  double computeWeight(int x1, int y1, int x2, int y2)
 	{
 		double sim = computeSimilarity(x1, y1, x2, y2);
 		double value = Math.exp(-1 * sim / (h * h));

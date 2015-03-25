@@ -2,6 +2,7 @@ package test;
 
 import algorithm.IAlgorithm;
 import algorithm.NLFilterMeans;
+import algorithm.NLFilterMeansThreading;
 import algorithm.NoiseGaussian;
 import io.GreyImageIO;
 import model.GreyImage;
@@ -38,8 +39,8 @@ public class TestNLFilter
 		// Params \\
 		int mean = 0;
 		int std = 15;
-		int windowSize = 3;
-		int patchSize = 5;
+		int windowSize = 2;
+		int patchSize = 8;
 		float h = 150.0f;
 
 		algo = new NoiseGaussian(inputImage, mean, std);
@@ -48,14 +49,17 @@ public class TestNLFilter
 
 		GreyImage gaussed = algo.getResult();
 
-		algo = new NLFilterMeans(gaussed, windowSize, patchSize, h);
+		algo = new NLFilterMeansThreading(gaussed, windowSize, patchSize, h);
 		algo.process();
 		images.add(algo.getResult());
+
+	    windowSize = 8;
+	    patchSize = 2;
 
 		algo = new NLFilterMeans(gaussed, windowSize + 5, patchSize, h);
 		algo.process();
 		images.add(algo.getResult());
-
+		
 		GreyImageViewerExtended viewer = new GreyImageViewerExtended(images);
 		viewer.show();
 	}
