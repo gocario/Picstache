@@ -6,6 +6,7 @@ import algorithm.NLFilterMeansThreading;
 import algorithm.NoiseGaussian;
 import io.GreyImageIO;
 import model.GreyImage;
+import model.Clock;
 import view.GreyImageViewerExtended;
 
 import java.util.ArrayList;
@@ -39,9 +40,10 @@ public class TestNLFilter
 		// Params \\
 		int mean = 0;
 		int std = 15;
-		int windowSize = 2;
-		int patchSize = 8;
+		int windowSize = 8;
+		int patchSize = 2;
 		float h = 150.0f;
+		Clock clock = new Clock();
 
 		algo = new NoiseGaussian(inputImage, mean, std);
 		algo.process();
@@ -49,16 +51,21 @@ public class TestNLFilter
 
 		GreyImage gaussed = algo.getResult();
 
+
+		clock.start();
+		algo = new NLFilterMeans(gaussed, windowSize, patchSize, h);
+		algo.process();
+		images.add(algo.getResult());
+		clock.stop();
+		
+		System.out.println("NLFilterMeans: " + clock.elapsedSecond() + "s");
+
+		clock.start();
 		algo = new NLFilterMeansThreading(gaussed, windowSize, patchSize, h);
 		algo.process();
 		images.add(algo.getResult());
-
-	    windowSize = 8;
-	    patchSize = 2;
-
-		algo = new NLFilterMeans(gaussed, windowSize + 5, patchSize, h);
-		algo.process();
-		images.add(algo.getResult());
+		clock.stop();
+		System.out.println("NLFilterMeansThreading: " + clock.elapsedSecond() + "s");
 		
 		GreyImageViewerExtended viewer = new GreyImageViewerExtended(images);
 		viewer.show();
