@@ -8,7 +8,7 @@ public class Clock
 	
 	private boolean isRunning;
 	
-	public Timer()
+	public Clock()
 	{
 		super();
 		

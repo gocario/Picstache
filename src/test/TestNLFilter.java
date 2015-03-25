@@ -19,7 +19,7 @@ public class TestNLFilter
 {
 	public static void main(String[] args)
 	{
-		args = new String[] {"lena_grey.png"};
+		args = new String[] {"sasha_grey.png"};
 
 		if (args.length != 1)
 		{
