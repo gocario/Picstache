@@ -41,7 +41,7 @@ public class TestNLFilter
 		int mean = 0;
 		int std = 15;
 		int windowSize = 8;
-		int patchSize = 2;
+		int patchSize = 4;
 		float h = 150.0f;
 		Clock clock = new Clock();
 
@@ -58,14 +58,14 @@ public class TestNLFilter
 		images.add(algo.getResult());
 		clock.stop();
 		
-		System.out.println("NLFilterMeans: " + clock.elapsedSecond() + "s");
+		System.out.println("NLFilterMeans: " + clock.getElapsedSeconds() + "s");
 
 		clock.start();
 		algo = new NLFilterMeansThreading(gaussed, windowSize, patchSize, h);
 		algo.process();
 		images.add(algo.getResult());
 		clock.stop();
-		System.out.println("NLFilterMeansThreading: " + clock.elapsedSecond() + "s");
+		System.out.println("NLFilterMeansThreading: " + clock.getElapsedSeconds() + "s");
 		
 		GreyImageViewerExtended viewer = new GreyImageViewerExtended(images);
 		viewer.show();

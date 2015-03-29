@@ -2,49 +2,79 @@ package model;
 
 public class Clock
 {
-	private long tStart;
-	private long tEnd;
-	private long tDelta;
-	
+	private long tStart = 0;
+	private long tOld = 0;
+	private long tElapsed = 0;
+
 	private boolean isRunning;
-	
+
 	public Clock()
 	{
-		super();
-		
-		tStart = tEnd = tDelta = System.currentTimeMillis();
-		isRunning = false;
+		this.tOld = this.tStart = System.currentTimeMillis();
+
+		this.isRunning = false;
 	}
-	
-	public long start()
+
+
+	public void start()
 	{
-		isRunning = true;
-		return tStart = System.currentTimeMillis();
+		this.reset();
+		this.isRunning = true;
 	}
-	
-	public long stop()
+
+	public void stop()
 	{
-		isRunning = false;
-		return tEnd = System.currentTimeMillis();
+		this.getDelta();
+		this.isRunning = false;
 	}
-	
-	public long elapsedTime()
+
+	public void reset()
 	{
-		return tDelta = (tEnd - tStart);
-	}	
-	
-	public double elapsedSecond()
-	{
-		return elapsedTime() / 1000;
+		this.tStart = this.tOld = System.currentTimeMillis();
+		this.tElapsed = 0;
 	}
-	
+
+	public long getElapsedTime()
+	{
+		return this.getElapsedMillis();
+	}
+
+	public long getElapsedMillis()
+	{
+		this.getDelta();
+		return this.tElapsed;
+	}
+
+	public double getElapsedSeconds()
+	{
+		return ((double) this.getElapsedMillis()) / 1000;
+	}
+
+	public long getDelta()
+	{
+		long diff = 0;
+
+		if (this.isRunning)
+		{
+			long tNew = System.currentTimeMillis();
+
+			diff = (tNew - this.tOld);
+
+			this.tOld = tNew;
+			this.tElapsed += diff;
+		}
+
+
+		return diff;
+	}
+
 	@Override
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		
-		sb.append(elapsedTime());
-		
+
+		sb.append(this.getElapsedTime());
+
 		return sb.toString();
 	}
 }
