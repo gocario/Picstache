@@ -40,7 +40,7 @@ public class TestNLFilter
 		// Params \\
 		int mean = 0;
 		int std = 15;
-		int windowSize = 8;
+		int windowSize = 4;
 		int patchSize = 4;
 		float h = 150.0f;
 		Clock clock = new Clock();

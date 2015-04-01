@@ -10,6 +10,9 @@ import model.GreyImage;
  */
 public abstract class Filter implements IAlgorithm
 {
+	protected static final int MIN_VALUE = 0;
+	protected static final int MAX_VALUE = 255;
+
 	protected GreyImage inputImage;
 	protected GreyImage outputImage;
 	

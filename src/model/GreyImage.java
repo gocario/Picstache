@@ -77,7 +77,7 @@ public class GreyImage
 	/**
 	 * @author Gocario
 	 * @param p
-	 * @return la valeur du pixel aux coordonnées (p.x, p.y) ; BORDER_VALUE si (p.x, p.y) n'est pas valide pour l'image
+	 * @return la valeur du pixel aux coordonn??es (p.x, p.y) ; BORDER_VALUE si (p.x, p.y) n'est pas valide pour l'image
 	 */
 	public int getPixel(Point p)
 	{
@@ -102,7 +102,7 @@ public class GreyImage
 	 * @author Gocario
 	 * @param p
 	 * @param value
-	 * @return Mets à jour la valeur du pixel aux coordonnées (p.x, p.y) ; ne fais rien si les coordonnées sont invalides pour l'image
+	 * @return Mets ?? jour la valeur du pixel aux coordonn??es (p.x, p.y) ; ne fais rien si les coordonn??es sont invalides pour l'image
 	 */
 	public void setPixel(Point p, int value)
 	{
@@ -135,5 +135,20 @@ public class GreyImage
 		{
 			data[offset] = value;
 		}
+	}
+
+
+	@Override
+	public GreyImage clone()
+	{
+		GreyImage that = new GreyImage(this.sizeX, this.sizeY);
+		
+		int length = data.length;
+		for (int i = 0; i < length; i++) 
+		{
+			that.data[i] = this.data[i];
+		}
+		
+		return that;
 	}
 }

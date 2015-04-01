@@ -10,9 +10,6 @@ import java.util.Random;
  */
 public class NoiseGaussian extends Filter
 {
-	private static final int MIN_VALUE = 0;
-	private static final int MAX_VALUE = 255;
-
 	private float mean;
 	private float std;
 
